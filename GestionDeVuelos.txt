@@ -96,8 +96,8 @@ CLASES
 1 - Flight:
 
 	flightNumber: String
-	origin: String
-	destination: String
+	origin: City
+	destination: City
 	flightType: Enum (NACIONAL, INTERNACIONAL)
 	ticketPrice: double
 	departureDateTime: LocalDateTime
@@ -113,7 +113,7 @@ CLASES
 3 - Airport:
 
 	airportCode: String
-	location: String
+	location: City
 
 4 - Customer:
 
@@ -127,14 +127,14 @@ CLASES
 
 5 - City:
 
-  cityName: String
-  stateOrProvince: String
-  country: String
+  	cityName: String
+  	stateOrProvince: String
+  	country: String
 
 6 - Ticket:
 
 	ticketId: String
-	seatNumber: String
+	seatNumber: int
 	flight: Flight
 	passenger: Customer
 	amountToPay: double
@@ -144,7 +144,7 @@ CLASES
 
 	ticketAvailability: boolean
 	selectedFlight: Flight
-	selectedSeat: String
+	selectedSeat: int
 	customerDetails: Customer
 
 8 - FlightManager:
