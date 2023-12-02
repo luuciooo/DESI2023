@@ -1,0 +1,172 @@
+DESCRIPCIÓN DEL PROBLEMA
+
+Dado que el aeropuerto de la localidad de Sauce Viejo, Santa Fe, se encuentra próximo a convertirse en aeropuerto internacional, se ha decidido reemplazar completamente el sistema de gestión y venta de pasajes utilizado por las autoridades, las diferentes compañías aéreas y agencias que operan en el mismo, para lo cual se le encarga el diseño e implementación de una solución de software atendiendo a las siguientes necesidades:
+Se desea ofrecer tanto a los potenciales clientes como a las agencias de turismo y compañías aéreas de un sistema integrado de venta de pasajes.
+Una de las situaciones a atender es cuando el cliente se acerca a la ventanilla de una agencia o compañía aérea con el objetivo de un pasaje aéreo. De igual manera se desea exponer el sistema a través de una pagina web para darle la posibilidad al cliente de comprar los pasajes por si mismo en lugar de ser atendido por un representante.
+Notar que para comprar un pasaje desde la web, el cliente deberá estar registrado, mientras que en caso de ser atendido por un representante, éste solicitará los datos al cliente justo antes de realizar la venta.
+El pasaje a obtener puede corresponder a un vuelo nacional o internacional. Si el vuelo es nacional se requerirán datos básicos, como el DNI, nombre y apellido, domicilio, e-mail y fecha de nacimiento, mientras que si se trata de un vuelo internacional se requerirá además que ingrese los datos del pasaporte (número, fecha de vencimiento). Por otra parte, el cálculo del importe a pagar es completamente diferente en ambos casos: el vuelo nacional pagará el costo del pasaje más una suma fija correspondiente a la tasa aeroportuaria y un 21% de IVA, mientras que el precio del vuelo internacional se calcula como el costo del pasaje (expresado en dólares) multiplicado por la cotización del dólar a la fecha de compra del pasaje más la tasa aeroportuaria internacional.
+El sistema permitirá el cobro mediante tarjeta de crédito, lo cual se realizará contratando los servicios de mercadopago u otra plataforma de pagos y emitirá factura electrónica consumiendo los servicios de AFIP.
+Para hacer posible la oferta de pasajes, desde la administración se darán de alta los vuelos indicando nro. de vuelo, fecha del mismo, hora de partida, capacidad del avión (indicando nro de filas y cantidad de asientos en cada fila) y destino del mismo.
+Se generará una base de clientes, con lo cual un cliente que ya ha comprado un pasaje no necesitará cargar sus datos nuevamente. Importante: si el cliente ya ha viajado en vuelos nacionales desde el aeropuerto, pero aún no ha cargado sus datos del pasaporte, el sistema no debe permitir venderle un vuelo internacional.
+Si el cliente se encuentra registrado en el sistema debidamente, se le permitirá insertar una compra de un pasaje simplemente indicando DNI, nro. de vuelo, nro. de asiento elegido. El sistema verificará que el asiento se encuentre disponible y efectuará la reserva, devolviendo como resultado el pasaje de avión emitido, compuesto por un ID (único y correlativo en todo el sistema), nro de asiento (fila y columna), nro de vuelo, fecha y hora de partida, origen, destino, pasajero, e importe a abonar y enviará un mail al cliente, con los datos del pasaje emitido.
+Desde la Administración del aeropuerto se realizará, no solo el alta de vuelos, sino la carga de demoras en los mismos, cancelaciones y reprogramaciones. Éstas generarán notificaciones a los clientes a través del correo electrónico.
+
+---------------------o---------------------
+
+HISTORIAS DE USUARIOS
+
+Historia 1
+Como Operador de aerolínea quiero poder programar un vuelo para que los clientes y vendedores cuenten con dicho vuelo a la hora de adquirir un ticket.
+Estimación: 8 
+Prioridad: Muy Alta 
+Riesgo: Bajo
+Criterios de Aceptación:
+El usuario deberá cargar los siguientes datos básicos del vuelo:
+	Nro de vuelo ( valor alfanumérico).
+	Origen (lista de selección con todas las ciudades registradas en el sistema).
+	Destino (lista de selección con todas las ciudades registradas en el sistema).
+	Tipo de vuelo (nacional/internacional).
+	Precio del pasaje (Nro positivo, con dos decimales. Aclaración: por simplicidad habrá un solo precio para todos los asientos).
+	Fecha y hora de partida.
+  Avión (lista seleccionable de aeronaves registradas en el sistema). Tenga presente que cada avión tendrá información de su capacidad (cant filas y nro de asientos por fila ) y ésta determina la capacidad del vuelo.
+No podrá haber dos vuelos para el mismo día, para un mismo avión.
+El nro de vuelo debe ser único.
+Todos los datos son requeridos.
+Todos los vuelos se registran con el estado "Normal".
+
+Historia 2
+Como Operador del aeropuerto quiero poder editar datos impositivos y de tasas para que puedan ser utilizados a la hora de calcular el importe a abonar por un pasaje aéreo
+Estimación: 8
+Prioridad: Alta
+Riesgo: Bajo
+Criterios de Aceptación:
+El sistema deberá permitir la edición de todas las tasas e impuestos necesarios para calcular el importe de un pasaje:
+	Iva (expresado en %, min:0, max:100).
+	Tasa aeroportuaria nacional (importe expresado en $).
+	Tasa aeroportuaria internacional (importe expresado en USD).
+	Cotización del dólar (importe expresado en $).
+Todos los datos son requeridos.
+Todos los valores son numéricos positivos, con dos decimales.
+No se permite agregar ninguna nueva tasa un eliminar una existente.
+
+Historia 3
+Como Operador de aerolínea y/o Cliente quiero poder listar los vuelos programados para el día para poder informar a los pasajeros acerca de próximos vuelos, horarios y estado del vuelo.
+Estimación: 8
+Prioridad: Muy Alta
+Riesgo: Bajo
+Criterios de Aceptación:
+El usuario ingresa:
+	Fecha a consultar (filtro obligatorio).
+	Origen (filtro opcional, lista de selección con todas las ciudades registradas en el sistema).
+	Destino (filtro opcional, lista de selección con todas las ciudades registradas en el sistema).
+	Tipo de vuelo (filtro opcional, valores posibles: nacional/internacional).
+La lista de vuelos mostrará las siguientes columnas:
+	Fecha. 
+	Nro de vuelo.
+	Tipo de Vuelo.
+	Estado (Normal/Reprogramado/Cancelado).
+	Cantidad de asientos libres.
+La lista se mostrará ordenada por fecha/hora de vuelo, mostrando primero las fechas mas cercanas.
+
+Historia 4
+Como Operador de una agencia de turismo quiero poder vender un pasaje aéreo a un cliente registrado para que los clientes que se acercan al local, puedan adquirir su ticket de vuelo.
+Estimación: 8
+Prioridad: Muy Alta
+Riesgo: Bajo
+Criterios de Aceptación:
+El usuario podrá tipear un dni y el sistema verifica que el mismo se encuentre registrado en el sistema.
+	Si el cliente se encuentra registrado, se muestran sus datos básicos:
+		nombre y apellido.
+		domicilio.
+		e-mail.
+		fecha de nacimiento.
+		nro pasaporte.
+	Si el cliente no se encuentra registrado, se muestra el error al usuario.
+El usuario elige:
+	Vuelo (lista desplegable de selección única). Una vez elegido el vuelo, el sistema mostrará el precio a pagar (por simplicidad considere que todos los asientos cuestan el mismo importe).
+	Asiento elegido (lista desplegable que mostrará solo aquellos asientos disponibles.
+Todos los datos son requeridos.
+El usuario presiona emitir ticket y el sistema muestra un mensaje indicando si el pasaje pudo ser vendido o no.
+Notar que esta historia de usuario no abarca el proceso de cobro.
+
+---------------------o---------------------
+
+CLASES
+
+1 - Flight:
+
+	flightNumber: String
+	origin: String
+	destination: String
+	flightType: Enum (NACIONAL, INTERNACIONAL)
+	ticketPrice: double
+	departureDateTime: LocalDateTime
+	aircraft: Aircraft
+	flightStatus: Enum (NORMAL, REPROGRAMADO, CANCELADO)
+
+2 - Aircraft:
+
+	capacity: int
+	numberOfRows: int
+	seatsPerRow: int
+
+3 - Airport:
+
+	airportCode: String
+	location: String
+
+4 - Customer:
+
+	dni: String
+	name: String
+	lastName: String
+	address: String
+	email: String
+	birthDate: LocalDate
+	passportNumber: String (puede ser opcional)
+
+5 - City:
+
+  cityName: String
+  stateOrProvince: String
+  country: String
+
+6 - Ticket:
+
+	ticketId: String
+	seatNumber: String
+	flight: Flight
+	passenger: Customer
+	amountToPay: double
+	issueDateTime: LocalDateTime
+
+7 - TicketManager:
+
+	ticketAvailability: boolean
+	selectedFlight: Flight
+	selectedSeat: String
+	customerDetails: Customer
+
+8 - FlightManager:
+
+	flightsScheduledForDay: List<Flight>
+	taxAndFees: TaxAndFeesConfig
+
+9 - TaxAndFeesConfig:
+
+	iva: double
+	nationalAirportTax: double
+	internationalAirportTax: double
+	dollarExchangeRate: double
+
+10 - PaymentGateway:
+
+(no se detallan atributos, ya que sería una integración con una plataforma externa de pagos)
+
+11 - EmailService:
+
+(no se detallan atributos, ya que se encargaría de enviar correos electrónicos para notificaciones)
+
+12 - DatabaseManager:
+
+(no se detallan atributos, sería responsable de interactuar con la base de datos)
