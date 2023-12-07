@@ -15,8 +15,8 @@ import lombok.NoArgsConstructor;
 public class Aircraft {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAircraft;
-    private int capacity;
-    private int numberOfRows;
-    private int seatsPerRow;
+    private Long idAircraft;
+    private Integer capacity;
+    private Integer numberOfRows;
+    private Integer seatsPerRow;
 }

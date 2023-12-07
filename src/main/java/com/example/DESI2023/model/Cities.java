@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Cities {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idCity;
+    private Long idCity;
     private String cityName;
     private String stateOrProvince;
     private String country;

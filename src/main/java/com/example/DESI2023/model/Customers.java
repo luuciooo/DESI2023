@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class Customers {
     @Id
-    private int dni;
+    private Long dni;
     private String firtsName;
     private String lastName;
     private String address;
