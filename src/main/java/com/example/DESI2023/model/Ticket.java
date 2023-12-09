@@ -11,24 +11,19 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Flights {
+public class Ticket {
     @Id
-    private String flightNumber;
-    private String flightType;
-    private Double ticketPrice;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idTicket;
+    private Integer seatNumber;
+    private Double amountToPay;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date departureDateTime;
-
-    private String flightStatus;
+    private Date issueDateTime;
 
     @ManyToOne
-    private Aircraft aircraft;
+    private Customer customer;
 
     @ManyToOne
-    private Cities originCity;
-
-    @ManyToOne
-    private Cities destCity;
-
+    private Flight flight;
 }

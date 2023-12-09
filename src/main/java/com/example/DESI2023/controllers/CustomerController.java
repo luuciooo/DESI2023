@@ -1,7 +1,8 @@
 package com.example.DESI2023.controllers;
 
-import com.example.DESI2023.model.Customers;
-import com.example.DESI2023.service.CustomersService;
+import com.example.DESI2023.model.Customer;
+import com.example.DESI2023.service.CustomerService;
+import com.example.DESI2023.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,21 +12,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/customers")
-public class CustomersController {
-    private final CustomersService customersService;
-    //private final FlightsService flightsService;
+public class CustomerController {
+    private final CustomerService customerService;
+    private final FlightService flightService;
 
     @Autowired
-    public CustomersController(CustomersService customersService, FligthsService fligthsService){
-        this.customersService=customersService;
-        this.flightsService=fligthsService;
+    public CustomerController(CustomerService customerService, FlightService flightService) {
+        this.customerService = customerService;
+        this.flightService = flightService;
     }
+
     @GetMapping("/search/{dni}")
-    public String searchCustomersByDni(@PathVariable Long dni, Model model){
-        Customers customers=customersService.findByDni(dni);
-        if (customers!=null){
+    public String searchCustomersByDni(@PathVariable Long dni, Model model) {
+        Customer customer = customerService.findByDni(dni);
+        if (customer != null) {
             //Mostrar los datos del cliente.
-            model.addAttribute("customer", customers);
+            model.addAttribute("customer", customer);
             //Mostrar todos los vuelos disponibles.
             model.addAttribute("flights", flightService.getAllFlights());
             //Nombre de la vista donde se muestran los datos del cliente y los vuelos.
@@ -35,6 +37,4 @@ public class CustomersController {
             return "customerNotFound";
         }
     }
-
-
 }

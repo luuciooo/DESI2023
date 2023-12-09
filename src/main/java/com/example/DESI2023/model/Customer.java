@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customers {
+public class Customer {
     @Id
     private Long dni;
     private String firtsName;

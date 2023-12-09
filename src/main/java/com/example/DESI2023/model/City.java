@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Cities {
+public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCity;
