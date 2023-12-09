@@ -91,82 +91,61 @@ Notar que esta historia de usuario no abarca el proceso de cobro.
 
 ---------------------o---------------------
 
-CLASES
+CLASES DE MODELO (model)
 
 1 - Flight:
-
-	flightNumber: String
-	origin: City
-	destination: City
-	flightType: Enum (NACIONAL, INTERNACIONAL)
-	ticketPrice: double
-	departureDateTime: LocalDateTime
+	flightNumber: String (PK)
+	origin: String
+	destination: String
+	flightType: String (NACIONAL, INTERNACIONAL)
+	ticketPrice: Double
+	departureDateTime: Date
 	aircraft: Aircraft
-	flightStatus: Enum (NORMAL, REPROGRAMADO, CANCELADO)
-
+	flightStatus: String (NORMAL, REPROGRAMADO, CANCELADO)
 2 - Aircraft:
-
-	capacity: int
-	numberOfRows: int
-	seatsPerRow: int
-
+	idAircraft: Long (PK)
+	capacity: Integer
+	numberOfRows: Integer
+	seatsPerRow: Integer
 3 - Airport:
-
-	airportCode: String
+	idAirport: String (PK)
 	location: City
-
 4 - Customer:
-
-	dni: String
+	dni: String (PK)
 	name: String
 	lastName: String
 	address: String
 	email: String
 	birthDate: LocalDate
 	passportNumber: String (puede ser opcional)
-
 5 - City:
-
-  	cityName: String
-  	stateOrProvince: String
-  	country: String
-
+  	idCity: Long (PK)
+	cityName: String
+	stateOrProvince: String
+	country: String
 6 - Ticket:
+	idTicket: Long (PK)
+	seatNumber: Integer
+	amountToPay: Double
+	issueDateTime: Date
 
-	ticketId: String
-	seatNumber: int
-	flight: Flight
-	passenger: Customer
-	amountToPay: double
-	issueDateTime: LocalDateTime
+---------------------o---------------------
 
-7 - TicketManager:
+CLASES DE PRESENTACIÓN (controller)
 
-	ticketAvailability: boolean
-	selectedFlight: Flight
-	selectedSeat: int
-	customerDetails: Customer
+1 - CustomerController
+2 - FlightController
 
-8 - FlightManager:
+---------------------o---------------------
 
-	flightsScheduledForDay: List<Flight>
-	taxAndFees: TaxAndFeesConfig
+CLASES DE LOGICA DE NEGOCIO (service)
 
-9 - TaxAndFeesConfig:
+1 - CustomerService
+2 - FlightService
 
-	iva: double
-	nationalAirportTax: double
-	internationalAirportTax: double
-	dollarExchangeRate: double
+---------------------o---------------------
 
-10 - PaymentGateway:
+CLASES DE ACCESO A DATOS (repository)
 
-(no se detallan atributos, ya que sería una integración con una plataforma externa de pagos)
-
-11 - EmailService:
-
-(no se detallan atributos, ya que se encargaría de enviar correos electrónicos para notificaciones)
-
-12 - DatabaseManager:
-
-(no se detallan atributos, sería responsable de interactuar con la base de datos)
+1 - CustomerRepository
+2 - FlightRepository
