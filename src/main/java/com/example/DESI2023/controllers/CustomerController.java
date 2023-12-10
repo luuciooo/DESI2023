@@ -4,13 +4,14 @@ import com.example.DESI2023.model.Customer;
 import com.example.DESI2023.service.CustomerService;
 import com.example.DESI2023.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("/customers")
 public class CustomerController {
     private final CustomerService customerService;
@@ -23,18 +24,15 @@ public class CustomerController {
     }
 
     @GetMapping("/search/{dni}")
-    public String searchCustomersByDni(@PathVariable Long dni, Model model) {
+    public ResponseEntity<?> getCustomerByDni(@PathVariable Long dni) {
         Customer customer = customerService.findByDni(dni);
         if (customer != null) {
-            //Mostrar los datos del cliente.
-            model.addAttribute("customer", customer);
-            //Mostrar todos los vuelos disponibles.
-            model.addAttribute("flights", flightService.getAllFlights());
-            //Nombre de la vista donde se muestran los datos del cliente y los vuelos.
-            return "customersDetails";
+            //Cliente encontrado, se devuelve la información básica
+            return ResponseEntity.ok().body(customer);
         } else {
-            //Manejar el caso de que el cliente no se encuentre registrado.
-            return "customerNotFound";
+            //Cliente no encontrado, se devuelve un mensaje de error
+            String errorMessage="Cliente con DNI "+dni+" no encontrado en la base de datos.";
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
 }
