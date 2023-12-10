@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -16,25 +17,10 @@ public class FlightService {
         this.flightRepository = flightRepository;
     }
 
-    public List<Flight> getAllFlights() {
-        return flightRepository.findAll();
+    public Flight findByFlightNumber(String flightNumber) {
+        Optional<Flight> optionalFlight = flightRepository.findById(flightNumber);
+        return optionalFlight.orElse(null);
     }
 
-    public Flight getFlightsById(String flightNumber){
-        return flightRepository.findByFlightNumber(flightNumber);
-    }
-    /*
-    public List<Seat> getAvailableSeatsForFlight(Long flightNumber){
-        //Logica para los asientos. No estoy seguro que sea esta la forma.
-    }
-    Flight flight =getFlightsById(flightNumber);
-    if (flight != null) {
-        // Suponiendo que Seat tenga un atributo booleano 'available' para determinar si está disponible
-        return flight.getSeats().stream()
-                .filter(Seat::isAvailable)
-                .collect(Collectors.toList());
-    } else {
-        return null;
-    }
-    */
+    //Otros métodos de servicio para la lógica relacionada con los vuelos.
 }
