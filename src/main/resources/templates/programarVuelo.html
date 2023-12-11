@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Programar Vuelo</title>
+    <!-- Agregar enlaces a Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-primary">Programar Vuelo</h2>
+    <form th:action="@{/api/vuelos/programar}" th:object="${flight}" method="post">
+        <div class="form-group">
+            <label for="flightNumber">Número de Vuelo:</label>
+            <input type="text" class="form-control" id="flightNumber" th:field="*{flightNumber}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="flightType">Tipo de Vuelo:</label>
+            <input type="text" class="form-control" id="flightType" th:field="*{flightType}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="ticketPrice">Precio del Boleto:</label>
+            <input type="number" class="form-control" id="ticketPrice" th:field="*{ticketPrice}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="departureDateTime">Fecha y Hora de Salida:</label>
+            <input type="datetime-local" class="form-control" id="departureDateTime" th:field="*{departureDateTime}" required>
+        </div>
+
+        <div class="form-group">
+            <label for="flightStatus">Estado de Vuelo:</label>
+            <input type="text" class="form-control" id="flightStatus" th:field="*{flightStatus}" required>
+        </div>
+
+        <!-- Seleccionar aeronave -->
+        <div class="form-group">
+            <label for="aircraft">Aeronave:</label>
+            <select class="form-control" id="aircraft" th:field="*{aircraft}">
+                <option th:each="aircraft : ${listOfAircrafts}" th:value="${aircraft}" th:text="${aircraft.name}"></option>
+            </select>
+        </div>
+
+        <!-- Seleccionar ciudad de origen -->
+        <div class="form-group">
+            <label for="originCity">Ciudad de Origen:</label>
+            <select class="form-control" id="originCity" th:field="*{originCity}">
+                <option th:each="city : ${listOfCities}" th:value="${city}" th:text="${city.name}"></option>
+            </select>
+        </div>
+
+        <!-- Seleccionar ciudad de destino -->
+        <div class="form-group">
+            <label for="destCity">Ciudad de Destino:</label>
+            <select class="form-control" id="destCity" th:field="*{destCity}">
+                <option th:each="city : ${listOfCities}" th:value="${city}" th:text="${city.name}"></option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Programar Vuelo</button>
+    </form>
+</div>
+
+<!-- Agregar enlaces a Bootstrap JS y jQuery (necesarios para algunas funcionalidades) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UJ7Xp8MDfG6dJbIzKI7I6en/zF5erFJl5gBbYXcCyBXW6AlyjzN7ePQCXBOAIWGh"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgydZPp2VST6tKaLOz1JLK6zgI0foAxKyiX+5PGFFm9SAwiGgFAW/dAiS6JX"
+        crossorigin="anonymous"></script>
+</body>
+</html>
