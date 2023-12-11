@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Lista de Vuelos</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .vuelo {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .vuelo:nth-child(2n) {
+            background-color: #fff;
+            color: #495057;
+        }
+
+        .vuelo:nth-child(2n-1) {
+            background-color: #ced4da;
+            color: #495057;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Lista de Vuelos</h2>
+    <ul class="list-group">
+        <li th:each="vuelo : ${vuelos}" class="list-group-item vuelo">
+            <span th:text="${vuelo.flightNumber}"></span> -
+            <span th:text="${vuelo.originCity.cityName}"></span> a
+            <span th:text="${vuelo.destCity.cityName}"></span> -
+            <span th:text="${vuelo.ticketPrice}"></span>
+        </li>
+    </ul>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

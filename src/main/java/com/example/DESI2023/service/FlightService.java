@@ -22,5 +22,8 @@ public class FlightService {
         return optionalFlight.orElse(null);
     }
 
+    public List<Flight> allFligth(){
+        return flightRepository.findAll();
+    }
     //Otros métodos de servicio para la lógica relacionada con los vuelos.
 }
