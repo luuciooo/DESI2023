@@ -1,4 +1,4 @@
-package com.example.DESI2023.controllers;
+/*package com.example.DESI2023.controllers;
 
 import com.example.DESI2023.model.Customer;
 import com.example.DESI2023.model.Flight;
@@ -40,7 +40,7 @@ public class CustomerController {
     }
 
     //Endpoint para seleccionar vuelo y asiento
-    @PostMapping("/{dni}/selected-flight")
+    @PostMapping("/{dni}/selectFlight")
     public ResponseEntity<?> selectFlightAndSeat(
             @PathVariable Long dni,
             @RequestParam String flightNumber,
@@ -84,3 +84,4 @@ public class CustomerController {
         }
     }
 }
+*/

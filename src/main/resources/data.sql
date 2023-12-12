@@ -46,6 +46,6 @@ VALUES
   (1, 1, 180.0, '2023-12-04 22:15:00', 345678901, 'FL004'),
   (5, 4, 300.0, '2023-12-05 08:30:00', 789012345, 'FL005');
 
---Insertar impuestos y tasas
-INSERT INTO desi2023.TaxInfo (iva, tasa_nacional, tasa_internacional, dolar)
-VALUES (21, 1100, 1.4, 400);
+-- Insertar datos de impuestos y tasas
+-- INSERT INTO desi2023.TaxInfo (iva, tasa_nacional, tasa_internacional, dolar)
+-- VALUES (21, 1100, 1.4, 400);
