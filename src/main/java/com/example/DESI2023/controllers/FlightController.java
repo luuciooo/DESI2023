@@ -27,7 +27,7 @@ private FlightService service;
         return "programarVuelo";
     }
 
-    @GetMapping("/all")
+    @GetMapping("/show")
     public String mostrarTodosLosVuelos(@RequestParam(name = "fecha", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
                                         Model model) {
         List<Flight> flights;
@@ -41,6 +41,7 @@ private FlightService service;
         }
 
         model.addAttribute("vuelos", flights);
+        model.addAttribute("fecha", fecha);
         return "mostrarVuelos";
     }
 

@@ -45,8 +45,4 @@ public class FlightService {
         return flightRepository.findByDepartureDateTimeBetween(startDate, endDate);
     }
 
-    public int availableSeats (){
-
-        return 0;
-    }
 }

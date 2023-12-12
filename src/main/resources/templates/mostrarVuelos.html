@@ -1,4 +1,4 @@
-<!DOCTYPE<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -32,10 +32,10 @@
     <h2 class="text-center">Lista de Vuelos</h2>
 
     <!-- Formulario de filtro por fecha -->
-    <form th:action="@{/flights/all}" method="get">
+    <form th:action="@{/flights/show}" method="get">
         <div class="form-group text-center">
             <label for="fecha">Filtrar por fecha:</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" />
+            <input type="date" id="fecha" name="fecha" class="form-control" th:value="${fecha}" />
         </div>
 
         <button type="submit" class="btn btn-primary">Filtrar</button>
