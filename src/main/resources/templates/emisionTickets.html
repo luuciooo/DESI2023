@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Emisión de Tickets</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5; /* Fondo gris claro */
+        }
+        .container {
+            padding-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #2196F3; /* Color azul */
+            color: white;
+            border-radius: 8px 8px 0 0;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .card-body {
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .btn-primary {
+            background-color: #2196F3; /* Color azul */
+            border-color: #2196F3; /* Color azul */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="m-0">Emisión de Tickets</h3>
+            <a th:href="@{/}" class="btn btn-secondary">Regresar al Índice</a>
+        </div>
+        <div class="card-body">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Búsqueda de Cliente</h5>
+                    <div class="form-group">
+                        <label for="dni">Ingrese DNI del cliente:</label>
+                        <input type="text" class="form-control" id="dni" placeholder="Ingrese DNI">
+                        <span class="material-icons">check</span> <!-- Tilde si se encuentra -->
+                    </div>
+                    <button class="btn btn-primary">Buscar Cliente</button>
+                    <p class="text-danger">Cliente no registrado, reintentar</p> <!-- Mensaje de error -->
+                </div>
+            </div>
+
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title">Selección de Vuelo y Asientos</h5>
+                    <div class="form-group">
+                        <label for="vuelos">Seleccione un vuelo:</label>
+                        <select class="form-control" id="vuelos">
+                            <!-- Opciones de vuelos -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fila">Número de fila de asientos:</label>
+                        <select class="form-control" id="fila">
+                            <!-- Opciones de filas -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="asiento">Seleccione un asiento:</label>
+                        <select class="form-control" id="asiento">
+                            <!-- Opciones de asientos -->
+                        </select>
+                    </div>
+                    <button class="btn btn-primary">Emitir Ticket</button>
+                </div>
+            </div>
+            <button class="btn btn-danger mt-3">Limpiar / Cancelar</button>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

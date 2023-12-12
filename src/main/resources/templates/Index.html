@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TP DESI 2023 - Índice</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f5f5; /* Fondo gris claro */
+        }
+        .container {
+            padding-top: 50px;
+        }
+        .card {
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #2196F3; /* Color azul */
+            color: white;
+            border-radius: 8px 8px 0 0;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .card-body {
+            background-color: white;
+            border-radius: 0 0 8px 8px;
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #2196F3; /* Color azul */
+            border-color: #2196F3; /* Color azul */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>TP DESI 2023 - Índice</h1>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="m-0">Programar Vuelo</h3>
+        </div>
+        <div class="card-body">
+            <p>Ir a la página para programar un vuelo.</p>
+            <a th:href="@{/programarVuelo}" class="btn btn-primary">Ir a Programar Vuelo</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="m-0">Mostrar Vuelos</h3>
+        </div>
+        <div class="card-body">
+            <p>Ver la lista de vuelos disponibles.</p>
+            <a th:href="@{/mostrarVuelos}" class="btn btn-primary">Ir a Mostrar Vuelos</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h3 class="m-0">Emisión de Tickets</h3>
+        </div>
+        <div class="card-body">
+            <p>Generar los tickets de vuelo.</p>
+            <a th:href="@{/emisionTickets}" class="btn btn-primary">Ir a Emisión de Tickets</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
