@@ -13,7 +13,7 @@ public class FlightService {
     private final FlightRepository flightRepository;
 
     @Autowired
-    public FlightService(FlightRepository flightRepository){
+    public FlightService(FlightRepository flightRepository) {
         this.flightRepository = flightRepository;
     }
 

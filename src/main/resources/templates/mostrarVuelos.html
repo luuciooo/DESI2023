@@ -30,14 +30,45 @@
 
 <div class="container mt-5">
     <h2>Lista de Vuelos</h2>
-    <ul class="list-group">
-        <li th:each="vuelo : ${vuelos}" class="list-group-item vuelo">
-            <span th:text="${vuelo.flightNumber}"></span> -
-            <span th:text="${vuelo.originCity.cityName}"></span> a
-            <span th:text="${vuelo.destCity.cityName}"></span> -
-            <span th:text="${vuelo.ticketPrice}"></span>
-        </li>
-    </ul>
+
+    <!-- Formulario de filtro por fecha y origen -->
+    <form th:action="@{/vuelos}" method="get">
+        <div class="form-group">
+            <label for="fecha">Filtrar por fecha:</label>
+            <input type="date" id="fecha" name="fecha" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="origen">Filtrar por origen:</label>
+            <select id="origen" name="origen" class="form-control">
+                <!-- Itera sobre la lista de ciudades para construir las opciones -->
+                <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.cityName}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+    </form>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Fecha y Hora</th>
+            <th>Número de Vuelo</th>
+            <th>Tipo de Vuelo</th>
+            <th>Estado</th>
+            <th>Cantidad de Asientos Libres</th>
+            <!-- Agrega más columnas según tus necesidades -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="vuelo : ${vuelos}" class="vuelo">
+            <td th:text="${#dates.format(vuelo.departureDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${vuelo.flightNumber}"></td>
+            <td th:text="${vuelo.flightType}"></td>
+            <td th:text="${vuelo.flightStatus}"></td>
+            <td th:text="${vuelo.originCity.cityName}"></td>
+            <!-- Agrega más celdas según las columnas que hayas añadido -->
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
