@@ -15,6 +15,7 @@ public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTicket;
+    private Integer numberRow;
     private Integer seatNumber;
     private Double amountToPay;
 

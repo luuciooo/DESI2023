@@ -2,8 +2,10 @@ package com.example.DESI2023.controllers;
 
 import com.example.DESI2023.model.Customer;
 import com.example.DESI2023.model.Flight;
+import com.example.DESI2023.model.TaxInfo;
 import com.example.DESI2023.service.CustomerService;
 import com.example.DESI2023.service.FlightService;
+import com.example.DESI2023.service.TaxInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
     private final CustomerService customerService;
     private final FlightService flightService;
+    private final TaxInfoService taxInfoService;
 
     @Autowired
-    public CustomerController(CustomerService customerService, FlightService flightService) {
+    public CustomerController(CustomerService customerService, FlightService flightService, TaxInfoService taxInfoService) {
         this.customerService = customerService;
         this.flightService = flightService;
+        this.taxInfoService = taxInfoService;
     }
 
     //Endpoint para obtener datos del cliente por DNI
@@ -71,11 +75,12 @@ public class CustomerController {
     // Método para calcular el precio del ticket según el tipo de vuelo
     private double calculateTicketPrice(Flight flight) {
         double ticketPrice = flight.getTicketPrice();
+        TaxInfo tax = taxInfoService.getTaxInfo();
 
         if (flight.getFlightType().equals("NACIONAL")) {
-            return ticketPrice + 1100 + (0.21 * ticketPrice); // Cálculo para vuelos nacionales
+            return ticketPrice + tax.getTasaNacional() + ((tax.getIva()/100) * ticketPrice); // Cálculo para vuelos nacionales
         } else {
-            return (ticketPrice + 1.40) * 375; // Cálculo para vuelos internacionales
+            return (ticketPrice + tax.getTasaInternacional()) * tax.getCotizacionDolar(); // Cálculo para vuelos internacionales
         }
     }
 }

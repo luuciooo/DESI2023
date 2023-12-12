@@ -38,10 +38,14 @@ VALUES
   ('FL004', 'national', 180.0, '2023-12-04 10:15:00', 'normal', 2, 3, 5),
   ('FL005', 'international', 350.0, '2023-12-05 14:00:00', 'normal', 3, 4, 1);
 
-  INSERT INTO desi2023.Ticket (seat_number, amount_to_pay, issue_date_time, customer_dni, flight_flight_number)
+  INSERT INTO desi2023.Ticket (number_row, seat_number, amount_to_pay, issue_date_time, customer_dni, flight_flight_number)
 VALUES
-  (10, 150.0, '2023-12-01 10:30:00', 123456789, 'FL001'),
-  (15, 250.0, '2023-12-02 14:45:00', 987654321, 'FL002'),
-  (20, 200.0, '2023-12-03 18:00:00', 456789012, 'FL003'),
-  (25, 180.0, '2023-12-04 22:15:00', 345678901, 'FL004'),
-  (30, 300.0, '2023-12-05 08:30:00', 789012345, 'FL005');
+  (5, 10, 150.0, '2023-12-01 10:30:00', 123456789, 'FL001'),
+  (1, 5, 250.0, '2023-12-02 14:45:00', 987654321, 'FL002'),
+  (2, 2, 200.0, '2023-12-03 18:00:00', 456789012, 'FL003'),
+  (1, 1, 180.0, '2023-12-04 22:15:00', 345678901, 'FL004'),
+  (5, 4, 300.0, '2023-12-05 08:30:00', 789012345, 'FL005');
+
+--Insertar impuestos y tasas
+INSERT INTO desi2023.TaxInfo (iva, tasa_nacional, tasa_internacional, dolar)
+VALUES (21, 1100, 1.4, 400);

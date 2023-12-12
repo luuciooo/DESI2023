@@ -48,7 +48,7 @@
         </div>
         <div class="card-body">
             <p>Ir a la página para programar un vuelo.</p>
-            <a th:href="@{/programarVuelo}" class="btn btn-primary">Ir a Programar Vuelo</a>
+            <a th:href="@{/flights/programar}" class="btn btn-primary">Ir a Programar Vuelo</a>
         </div>
     </div>
 
@@ -58,17 +58,17 @@
         </div>
         <div class="card-body">
             <p>Ver la lista de vuelos disponibles.</p>
-            <a th:href="@{/mostrarVuelos}" class="btn btn-primary">Ir a Mostrar Vuelos</a>
+            <a th:href="@{/flights/all}" class="btn btn-primary">Ir a Mostrar Vuelos</a>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <h3 class="m-0">Emisión de Tickets</h3>
+            <h3 class="m-0">Editar Datos Impositivos y de Tasas</h3>
         </div>
         <div class="card-body">
-            <p>Generar los tickets de vuelo.</p>
-            <a th:href="@{/emisionTickets}" class="btn btn-primary">Ir a Emisión de Tickets</a>
+            <p>Modifica los valores de impuestos y tasas.</p>
+            <a th:href="@{/tax}" class="btn btn-primary">Ir a Editar Datos Impositivos y de Tasas</a>
         </div>
     </div>
 </div>
