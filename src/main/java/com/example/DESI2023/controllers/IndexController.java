@@ -21,9 +21,5 @@ public class IndexController {
         return "mostrarVuelos"; // Nombre del archivo HTML para la página de mostrar vuelos
     }
 
-    @GetMapping("/emisionTickets")
-    public String emisionTickets() {
-        return "emisionTickets"; // Nombre del archivo HTML para la página de emisión de tickets
-    }
 }
 
