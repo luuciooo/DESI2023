@@ -29,42 +29,37 @@
 <body>
 
 <div class="container mt-5">
-    <h2>Lista de Vuelos</h2>
+    <h2 class="text-center">Lista de Vuelos</h2>
 
-    <!-- Formulario de filtro por fecha y origen -->
-    <form th:action="@{/vuelos}" method="get">
-        <div class="form-group">
+    <!-- Formulario de filtro por fecha -->
+    <form th:action="@{/flights/show}" method="get">
+        <div class="form-group text-center">
             <label for="fecha">Filtrar por fecha:</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" />
+            <input type="date" id="fecha" name="fecha" class="form-control" th:value="${fecha}" />
         </div>
-        <div class="form-group">
-            <label for="origen">Filtrar por origen:</label>
-            <select id="origen" name="origen" class="form-control">
-                <!-- Itera sobre la lista de ciudades para construir las opciones -->
-                <option th:each="ciudad : ${ciudades}" th:value="${ciudad.id}" th:text="${ciudad.cityName}"></option>
-            </select>
-        </div>
+
         <button type="submit" class="btn btn-primary">Filtrar</button>
+        <a href="http://localhost:8080/" class="btn btn-secondary ml-2">Volver al Índice</a>
     </form>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Fecha y Hora</th>
-            <th>Número de Vuelo</th>
-            <th>Tipo de Vuelo</th>
-            <th>Estado</th>
-            <th>Cantidad de Asientos Libres</th>
+            <th class="text-center">Fecha y Hora</th>
+            <th class="text-center">Número de Vuelo</th>
+            <th class="text-center">Tipo de Vuelo</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Cantidad de Asientos Libres</th>
             <!-- Agrega más columnas según tus necesidades -->
         </tr>
         </thead>
         <tbody>
         <tr th:each="vuelo : ${vuelos}" class="vuelo">
-            <td th:text="${#dates.format(vuelo.departureDateTime, 'dd-MM-yyyy HH:mm')}"></td>
-            <td th:text="${vuelo.flightNumber}"></td>
-            <td th:text="${vuelo.flightType}"></td>
-            <td th:text="${vuelo.flightStatus}"></td>
-            <td th:text="${vuelo.originCity.cityName}"></td>
+            <td class="text-center" th:text="${#dates.format(vuelo.departureDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+            <td class="text-center" th:text="${vuelo.flightNumber}"></td>
+            <td class="text-center" th:text="${vuelo.flightType}"></td>
+            <td class="text-center" th:text="${vuelo.flightStatus}"></td>
+            <td class="text-center" th:text="${vuelo.getAvailableSeats()}"></td>
             <!-- Agrega más celdas según las columnas que hayas añadido -->
         </tr>
         </tbody>
