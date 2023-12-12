@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edición de Tasas e Impuestos del Aeropuerto</title>
+    <!-- Enlaces a los estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Estilos propios -->
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color gris claro */
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            background-color: #ffffff; /* Color blanco */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .card-header {
+            background-color: #007bff; /* Color azul */
+            color: #ffffff; /* Texto en color blanco */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <h5 class="card-header">Edición de Tasas e Impuestos del Aeropuerto</h5>
+        <div class="card-body">
+            <form th:action="@{/edit-tax-data}" method="post">
+                <div class="form-group">
+                    <label for="iva">IVA (%)</label>
+                    <input type="number" class="form-control" id="iva" name="iva" min="0" max="100" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="tasaNacional">Tasa Aeroportuaria Nacional ($)</label>
+                    <input type="number" class="form-control" id="tasaNacional" name="tasaNacional" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="tasaInternacional">Tasa Aeroportuaria Internacional (USD)</label>
+                    <input type="number" class="form-control" id="tasaInternacional" name="tasaInternacional" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="cotizacionDolar">Cotización del Dólar ($)</label>
+                    <input type="number" class="form-control" id="cotizacionDolar" name="cotizacionDolar" min="0" step="0.01" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts de Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
