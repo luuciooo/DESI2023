@@ -27,9 +27,12 @@
 <body>
 <div class="container">
     <div class="card">
-        <h5 class="card-header">Edición de Tasas e Impuestos del Aeropuerto</h5>
+        <h5 class="card-header">
+            <a href="/" class="btn btn-secondary float-right">Volver al Índice</a>
+            Edición de Tasas e Impuestos del Aeropuerto
+        </h5>
         <div class="card-body">
-            <form th:action="@{/edit-tax-data}" method="post">
+            <form th:action="@{/taxdata}" method="post">
                 <div class="form-group">
                     <label for="iva">IVA (%)</label>
                     <input type="number" class="form-control" id="iva" name="iva" min="0" max="100" step="0.01" required>

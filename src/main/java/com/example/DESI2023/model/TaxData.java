@@ -18,7 +18,7 @@ public class TaxData {
     private Long id;
 
     private double iva;
-    private double tasaAeroportuariaNacional;
-    private double tasaAeroportuariaInternacional;
+    private double tasaNacional;
+    private double tasaInternacional;
     private double cotizacionDolar;
 }

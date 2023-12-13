@@ -8,7 +8,7 @@ public class IndexController {
 
     @GetMapping("/")
     public String index() {
-        return "Index"; // Esto hace referencia al nombre del archivo HTML (index.html) en tu carpeta de plantillas Thymeleaf
+        return "Index";
     }
 
     @GetMapping("/programarVuelo")
@@ -20,6 +20,13 @@ public class IndexController {
     public String mostrarVuelos() {
         return "mostrarVuelos"; // Nombre del archivo HTML para la página de mostrar vuelos
     }
+    /*
+    @GetMapping("/taxdata")
+    public String impuestos() {
+        return "impuestos"; // Nombre del archivo HTML para la página de impuestos
+    }
+
+     */
 
 }
 
