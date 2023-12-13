@@ -16,18 +16,17 @@ import java.util.Optional;
 
 @Service
 public class FlightService {
-    private final FlightRepository flightRepository;
-
     @Autowired
-    public FlightService(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
+    private  FlightRepository flightRepository;
+
 
     public Flight findByFlightNumber(String flightNumber) {
         Optional<Flight> optionalFlight = flightRepository.findById(flightNumber);
         return optionalFlight.orElse(null);
     }
-
+    public void programarVuelo(Flight flight){
+        flightRepository.save(flight);
+    }
     public List<Flight> allFligth(){
         return flightRepository.findAll();
     }
@@ -44,5 +43,22 @@ public class FlightService {
         // Llama al repositorio para obtener los vuelos en el rango de fechas
         return flightRepository.findByDepartureDateTimeBetween(startDate, endDate);
     }
+
+
+    public boolean existeVueloEnMismoDia(Flight flight) {
+
+
+
+        // Realizar la consulta en el repositorio para verificar si hay un vuelo para el mismo día y avión
+        List<Date> DatesFlight = flightRepository.findFlightDatesByAircraft(flight.getAircraft());
+
+        return DatesFlight.contains(flight.getDepartureDateTime());
+    }
+
+    public boolean existeNumeroDeVuelo(String flightNumber) {
+        // Verificar si ya existe un vuelo con el mismo número de vuelo
+        return flightRepository.existsByFlightNumber(flightNumber);
+    }
+
 
 }

@@ -8,60 +8,84 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="bg-light">
-<div class="container mt-5">
+<div class="container-fluid mt-5 my-4">
     <h2 class="text-primary">Programar Vuelo</h2>
-    <form th:action="@{/api/vuelos/programar}" th:object="${flight}" method="post">
-        <div class="form-group">
-            <label for="flightNumber">Número de Vuelo:</label>
-            <input type="text" class="form-control" id="flightNumber" th:field="*{flightNumber}" required>
+    <div class="container my-4 ">
+        <div th:if="${mensajeExito}" class="alert alert-success" role="alert">
+            <p th:text="${mensajeExito}"></p>
         </div>
+        <form th:action="@{/flights/programar}" th:object="${flight}" method="post">
+            <div class="form-group">
+                <label for="flightNumber">Número de Vuelo:</label>
+                <input type="text" pattern="[A-Za-z0-9]+" class="form-control" id="flightNumber"
+                       th:field="*{flightNumber}" required>
+            </div>
 
-        <div class="form-group">
-            <label for="flightType">Tipo de Vuelo:</label>
-            <input type="text" class="form-control" id="flightType" th:field="*{flightType}" required>
-        </div>
+            <div class="form-group">
+                <label for="flightType">Tipo de Vuelo:</label>
+                <select class="form-control" id="flightType" th:field="*{flightType}" required>
+                    <option value="NACIONAL">Nacional</option>
+                    <option value="INTERNACIONAL">Internacional</option>
+                </select>
+            </div>
 
-        <div class="form-group">
-            <label for="ticketPrice">Precio del Boleto:</label>
-            <input type="number" class="form-control" id="ticketPrice" th:field="*{ticketPrice}" required>
-        </div>
+            <div class="form-group">
+                <label for="ticketPrice">Precio del Boleto:</label>
+                <input type="number" step="0.01" class="form-control" id="ticketPrice" th:field="*{ticketPrice}"
+                       required>
+            </div>
 
-        <div class="form-group">
-            <label for="departureDateTime">Fecha y Hora de Salida:</label>
-            <input type="datetime-local" class="form-control" id="departureDateTime" th:field="*{departureDateTime}" required>
-        </div>
+            <div class="form-group">
+                <label for="departureDateTime">Fecha y Hora de Salida:</label>
+                <input type="datetime-local" class="form-control" id="departureDateTime" th:field="*{departureDateTime}"
+                       required>
+            </div>
 
-        <div class="form-group">
-            <label for="flightStatus">Estado de Vuelo:</label>
-            <input type="text" class="form-control" id="flightStatus" th:field="*{flightStatus}" required>
-        </div>
 
-        <!-- Seleccionar aeronave -->
-        <div class="form-group">
-            <label for="aircraft">Aeronave:</label>
-            <select class="form-control" id="aircraft" th:field="*{aircraft}">
-                <option th:each="aircraft : ${listOfAircrafts}" th:value="${aircraft}" th:text="${aircraft.name}"></option>
-            </select>
-        </div>
+            <!-- Seleccionar aeronave -->
+            <div class="form-group">
+                <label for="aircraft">Aeronave:</label>
+                <select class="form-control" id="aircraft" name="aircraftId" required>
+                    <option th:each="aircraft : ${listOfAircrafts}" th:value="${aircraft.idAircraft}"
+                            th:text="${'ID: ' + aircraft.idAircraft + ', Capacidad: ' + aircraft.capacity + ', Filas: ' + aircraft.numberOfRows + ', Asientos por fila: ' + aircraft.seatsPerRow}"></option>
+                </select>
+            </div>
 
-        <!-- Seleccionar ciudad de origen -->
-        <div class="form-group">
-            <label for="originCity">Ciudad de Origen:</label>
-            <select class="form-control" id="originCity" th:field="*{originCity}">
-                <option th:each="city : ${listOfCities}" th:value="${city}" th:text="${city.name}"></option>
-            </select>
-        </div>
+            <!-- Seleccionar ciudad de origen -->
+            <div class="form-group">
+                <label for="originCity">Ciudad de Origen:</label>
+                <select class="form-control" id="originCity" th:field="*{originCity}" required>
+                    <option th:each="city : ${listOfCities}" th:value="${city.idCity}" th:text="${'Ciudad: ' + city.cityName + ', Estado/Provincia: ' + city.stateOrProvince + ', País: ' + city.country}"></option>
+                </select>
+            </div>
 
-        <!-- Seleccionar ciudad de destino -->
-        <div class="form-group">
-            <label for="destCity">Ciudad de Destino:</label>
-            <select class="form-control" id="destCity" th:field="*{destCity}">
-                <option th:each="city : ${listOfCities}" th:value="${city}" th:text="${city.name}"></option>
-            </select>
-        </div>
+            <!-- Seleccionar ciudad de destino -->
+            <div class="form-group">
+                <label for="destCity">Ciudad de Destino:</label>
+                <select class="form-control" id="destCity" th:field="*{destCity}" required>
+                    <option th:each="city : ${listOfCities}" th:value="${city.idCity}" th:text="${'Ciudad: ' + city.cityName + ', Estado/Provincia: ' + city.stateOrProvince + ', País: ' + city.country}"></option>
+                </select>
+            </div>
 
-        <button type="submit" class="btn btn-primary">Programar Vuelo</button>
-    </form>
+            <div th:if="${validationErrors != null}">
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <li th:each="error : ${validationErrors}" th:text="${error.defaultMessage}"></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Mensaje de error para departureDateTime -->
+            <div th:if="${#fields.hasErrors('departureDateTime')}" th:errors="*{departureDateTime}" class="alert alert-danger" role="alert"></div>
+
+            <button type="submit" class="btn btn-primary">Programar Vuelo</button>
+
+            <button type="reset" class="btn btn-warning">Borrar Campos</button>
+
+            <!-- Botón para volver al índice -->
+            <a th:href="@{/}" class="btn btn-secondary">Volver al Índice</a>
+        </form>
+
+    </div>
 </div>
 
 <!-- Agregar enlaces a Bootstrap JS y jQuery (necesarios para algunas funcionalidades) -->
@@ -74,5 +98,26 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgydZPp2VST6tKaLOz1JLK6zgI0foAxKyiX+5PGFFm9SAwiGgFAW/dAiS6JX"
         crossorigin="anonymous"></script>
+<script>
+    // Función para actualizar el contenido del div con el ID seleccionado
+    function updateSelectedId(selectId, divId) {
+        var selectElement = document.getElementById(selectId);
+        var selectedId = selectElement.options[selectElement.selectedIndex].id;
+        document.getElementById(divId).innerText = "ID seleccionado: " + selectedId;
+    }
+
+    // Capturar eventos de cambio para los elementos select
+    document.getElementById('aircraft').addEventListener('change', function () {
+        updateSelectedId('aircraft', 'selectedAircraftId');
+    });
+
+    document.getElementById('originCity').addEventListener('change', function () {
+        updateSelectedId('originCity', 'selectedOriginCityId');
+    });
+
+    document.getElementById('destCity').addEventListener('change', function () {
+        updateSelectedId('destCity', 'selectedDestCityId');
+    });
+</script>
 </body>
 </html>

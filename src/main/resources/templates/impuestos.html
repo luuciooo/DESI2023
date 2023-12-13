@@ -32,7 +32,7 @@
             Edición de Tasas e Impuestos del Aeropuerto
         </h5>
         <div class="card-body">
-            <form th:action="@{/taxdata}" method="post">
+            <form th:action="@{/taxdata/update}" method="post">
                 <div class="form-group">
                     <label for="iva">IVA (%)</label>
                     <input type="number" class="form-control" id="iva" name="iva" min="0" max="100" step="0.01" required>

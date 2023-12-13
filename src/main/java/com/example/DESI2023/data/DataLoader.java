@@ -9,7 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 
 import java.nio.charset.StandardCharsets;
 
-@Component
+//@Component
 public class DataLoader implements CommandLineRunner {
 
     @Autowired
