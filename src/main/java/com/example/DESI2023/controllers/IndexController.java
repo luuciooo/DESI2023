@@ -11,22 +11,8 @@ public class IndexController {
         return "Index";
     }
 
-    @GetMapping("/programarVuelo")
-    public String programarVuelo() {
-        return "programarVuelo"; // Nombre del archivo HTML para la página de programar vuelo
-    }
 
-    @GetMapping("/mostrarVuelos")
-    public String mostrarVuelos() {
-        return "mostrarVuelos"; // Nombre del archivo HTML para la página de mostrar vuelos
-    }
-    /*
-    @GetMapping("/taxdata")
-    public String impuestos() {
-        return "impuestos"; // Nombre del archivo HTML para la página de impuestos
-    }
 
-     */
 
 }
 

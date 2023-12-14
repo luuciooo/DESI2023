@@ -5,12 +5,23 @@ VALUES
   ('Londres', 'Inglaterra', 'Reino Unido'),
   ('París', 'Isla de Francia', 'Francia'),
   ('Sídney', 'Nueva Gales del Sur', 'Australia'),
-  ('Tokio', 'Tokio', 'Japón');
+  ('Tokio', 'Tokio', 'Japón'),
+  ('Barcelona', 'Cataluña', 'España'),
+  ('Hamburgo', 'Hamburgo', 'Alemania'),
+  ('Milán', 'Lombardía', 'Italia'),
+  ('Shanghái', 'Shanghái', 'China'),
+  ('Guadalajara', 'Jalisco', 'México'),
+  ('Madrid', 'Comunidad de Madrid', 'España'),
+  ('Berlín', 'Berlín', 'Alemania'),
+  ('Roma', 'Lacio', 'Italia'),
+  ('Pekín', 'Pekín', 'China'),
+  ('México DF', 'Ciudad de México', 'México');
 
 
 -- Insertar 5 aeropuertos de ejemplo en las ciudades
 INSERT INTO desi2023.Airport (id_airport, location_id_city)
-VALUES ('JFK', 1), ('LHR', 2), ('CDG', 3), ('SYD', 4), ('HND', 5);
+VALUES ('JFK', 1), ('LHR', 2), ('CDG', 3), ('SYD', 4), ('HND', 5),('BCN', 6), ('HAM', 7), ('MXP', 8), ('SHA', 9), ('GDL', 10),
+ ('MAD', 11), ('TXL', 12), ('FCO', 13), ('PEK', 14), ('MEX', 15);
 
 
 -- Insertar 5 modelos de aeronaves de ejemplo

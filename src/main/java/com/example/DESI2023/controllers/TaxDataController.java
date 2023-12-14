@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/taxdata")
 public class TaxDataController {
     private final TaxDataService taxDataService;
 
@@ -18,16 +20,16 @@ public class TaxDataController {
         this.taxDataService = taxDataService;
     }
 
-    @GetMapping("/taxdata")
+    @GetMapping("/form")
     public String showTaxDataForm(Model model) {
         model.addAttribute("taxData", taxDataService.getTaxData());
         return "impuestos";
     }
 
-    @PostMapping("/taxdata")
+    @PostMapping("/update")
     public String updateTaxData(@ModelAttribute("taxData") TaxData taxData) {
         taxDataService.saveTaxData(taxData);
-        return "redirect:/taxdata";
+        return "redirect:/taxdata/form";
     }
 
 }
