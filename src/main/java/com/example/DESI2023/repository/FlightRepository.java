@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
 import java.util.Date;
 
@@ -18,6 +19,21 @@ public interface FlightRepository extends JpaRepository<Flight, String> {
 
     // Método para buscar vuelos en un rango de fechas.
     List<Flight> findByDepartureDateTimeBetween(Date startDate, Date endDate);
+
+
+    List<Flight> findByDepartureDateTimeBetweenAndOriginCityIdCityAndDestCityIdCity(
+            Date startDate, Date endDate, Long originCityId, Long destCityId);
+
+    List<Flight> findByOriginCityIdCity(Long originCityId);
+
+    List<Flight> findByDestCityIdCity(Long destCityId);
+
+    List<Flight> findByDepartureDateTimeBetweenAndDestCityIdCity(Date startDate, Date endDate, Long destCityId);
+
+    List<Flight>  findByDepartureDateTimeBetweenAndOriginCityIdCity(Date startDate, Date endDate, Long originCityId);
+
+    List<Flight>  findByOriginCityIdCityAndDestCityIdCity(Long originCityId, Long destCityId);
+
 
     @Query("SELECT DISTINCT DATE(f.departureDateTime) FROM Flight f WHERE f.aircraft = :aircraft")
     List<Date> findFlightDatesByAircraft(@Param("aircraft") Aircraft aircraft);

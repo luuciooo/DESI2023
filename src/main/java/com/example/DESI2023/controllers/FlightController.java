@@ -75,20 +75,31 @@ public class FlightController {
     }
 
     @GetMapping("/show")
-    public String mostrarTodosLosVuelos(@RequestParam(name = "fecha", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                        Model model) {
+    public String mostrarTodosLosVuelos(
+            @RequestParam(name = "fecha", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            @RequestParam(name = "origen", required = false) Long idCiudadOrigen,
+            @RequestParam(name = "destino", required = false) Long idCiudadDestino,
+            Model model) {
+
         List<Flight> flights;
 
-        if (fecha != null) {
-            // Si se proporciona la fecha, filtra los vuelos por esa fecha
-            flights = service.getFlightsByDate(fecha);
+        // Filtra los vuelos según los parámetros proporcionados
+        if (fecha != null || idCiudadOrigen != null || idCiudadDestino != null) {
+            // Filtra los vuelos según los parámetros proporcionados
+            flights = service.getFlightsByFilters(fecha, idCiudadOrigen, idCiudadDestino);
         } else {
-            // Si no se proporciona la fecha, obtiene todos los vuelos
+            // Si no se proporcionan parámetros, obtén todos los vuelos
             flights = service.allFligth();
         }
 
+        // Agrega las ciudades disponibles al modelo
+        List<City> ciudades = service.getAllCities();
         model.addAttribute("vuelos", flights);
         model.addAttribute("fecha", fecha);
+        model.addAttribute("ciudades", ciudades);
+        model.addAttribute("origen", idCiudadOrigen);
+        model.addAttribute("destino", idCiudadDestino);
+
         return "mostrarVuelos";
     }
 
