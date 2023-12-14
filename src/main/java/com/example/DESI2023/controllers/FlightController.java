@@ -1,5 +1,6 @@
 package com.example.DESI2023.controllers;
 
+import com.example.DESI2023.model.City;
 import com.example.DESI2023.model.Flight;
 import com.example.DESI2023.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,32 @@ private FlightService service;
     }
 
     @GetMapping("/show")
-    public String mostrarTodosLosVuelos(@RequestParam(name = "fecha", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
-                                        Model model) {
-        List<Flight> flights;
+    public String mostrarTodosLosVuelos(
+            @RequestParam(name = "fecha", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fecha,
+            @RequestParam(name = "origen", required = false) Long idCiudadOrigen,
+            @RequestParam(name = "destino", required = false) Long idCiudadDestino,
+            Model model) {
 
-        if (fecha != null) {
-            // Si se proporciona la fecha, filtra los vuelos por esa fecha
-            flights = service.getFlightsByDate(fecha);
+        List<Flight> flights;
+        List<Flight> flights2;
+
+        // Filtra los vuelos según los parámetros proporcionados
+        if (fecha != null || idCiudadOrigen != null || idCiudadDestino != null) {
+            // Filtra los vuelos según los parámetros proporcionados
+            flights = service.getFlightsByFilters(fecha, idCiudadOrigen, idCiudadDestino);
         } else {
-            // Si no se proporciona la fecha, obtiene todos los vuelos
+            // Si no se proporcionan parámetros, obtén todos los vuelos
             flights = service.allFligth();
         }
 
+        // Agrega las ciudades disponibles al modelo
+        List<City> ciudades = service.getAllCities();
         model.addAttribute("vuelos", flights);
         model.addAttribute("fecha", fecha);
+        model.addAttribute("ciudades", ciudades);
+        model.addAttribute("origen", idCiudadOrigen);
+        model.addAttribute("destino", idCiudadDestino);
+
         return "mostrarVuelos";
     }
 

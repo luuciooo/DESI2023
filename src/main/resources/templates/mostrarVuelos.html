@@ -31,11 +31,31 @@
 <div class="container mt-5">
     <h2 class="text-center">Lista de Vuelos</h2>
 
-    <!-- Formulario de filtro por fecha -->
+    <!-- Formulario de filtro por fecha, ciudad de origen y ciudad de destino -->
     <form th:action="@{/flights/show}" method="get">
         <div class="form-group text-center">
             <label for="fecha">Filtrar por fecha:</label>
             <input type="date" id="fecha" name="fecha" class="form-control" th:value="${fecha}" />
+        </div>
+
+        <!-- Lista desplegable para Ciudad de Origen -->
+        <div class="form-group text-center">
+            <label for="origen">Ciudad de Origen:</label>
+            <select id="origen" name="origen" class="form-control">
+                <option value="">Todas las Ciudades</option>
+                <option th:each="city : ${ciudades}" th:value="${city.idCity}" th:text="${city.cityName}"
+                th:selected="${city.idCity == origen}"></option>
+            </select>
+        </div>
+
+        <!-- Lista desplegable para Ciudad de Destino -->
+        <div class="form-group text-center">
+            <label for="destino">Ciudad de Destino:</label>
+            <select id="destino" name="destino" class="form-control">
+                <option value="">Todas las Ciudades</option>
+                <option th:each="city : ${ciudades}" th:value="${city.idCity}" th:text="${city.cityName}"
+                        th:selected="${city.idCity == destino}"></option>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Filtrar</button>
@@ -60,8 +80,7 @@
             <td class="text-center" th:text="${vuelo.flightType}"></td>
             <td class="text-center" th:text="${vuelo.flightStatus}"></td>
             <td class="text-center" th:text="${vuelo.getAvailableSeats()}"></td>
-            <!-- Agrega más celdas según las columnas que hayas añadido -->
-        </tr>
+                    </tr>
         </tbody>
     </table>
 </div>
