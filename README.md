@@ -5,7 +5,7 @@
 
 - Lucio Abalos - lucioabalos97@gmail.com
 - Juan Martin Garau - jgarau@frsf.utn.edu.ar
-- Lucas Martin Vegetti - [Correo Electrónico 3]
+- Lucas Martin Vegetti - lvegetti@frsf.utn.edu.ar
 
 **Repositorio en GitHub:**
 
