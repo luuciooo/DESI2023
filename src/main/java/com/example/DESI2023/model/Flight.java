@@ -4,13 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Flight {
@@ -25,6 +30,7 @@ public class Flight {
     @DecimalMax(value = "99999.99")
     private Double ticketPrice;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @NotNull
     @FutureOrPresent
     @Temporal(TemporalType.TIMESTAMP)
@@ -48,13 +54,14 @@ public class Flight {
     private List<Ticket> tickets;
 
     public int getAvailableSeats() {
-        // Obtener la cantidad total de asientos del avión (puedes ajustar esto según tu lógica)
+
         int totalSeats = aircraft.getNumberOfRows() * aircraft.getSeatsPerRow();
 
-        // Obtener la cantidad de tickets vendidos para este vuelo
+
         int soldSeats = tickets.size();
 
-        // Calcular y devolver la cantidad de asientos disponibles
         return totalSeats - soldSeats;
     }
+    
+    
 }

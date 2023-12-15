@@ -14,10 +14,8 @@ import java.util.Date;
 
 @Repository
 public interface FlightRepository extends JpaRepository<Flight, String> {
-    //Metodo para buscar vuelos por numero.
     Flight findByFlightNumber(String flightNumber);
 
-    // Método para buscar vuelos en un rango de fechas.
     List<Flight> findByDepartureDateTimeBetween(Date startDate, Date endDate);
 
 

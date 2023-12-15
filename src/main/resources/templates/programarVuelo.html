@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Programar Vuelo</title>
-    <!-- Agregar enlaces a Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body class="bg-light">
 <div class="container-fluid mt-5 my-4">
     <h2 class="text-primary">Programar Vuelo</h2>
+    <div th:if="${operacionExitosa}" class="alert alert-success" role="alert">
+    <p th:text="${operacionExitosa}"></p>
+    </div>
     <div class="container my-4 ">
-        <div th:if="${mensajeExito}" class="alert alert-success" role="alert">
-            <p th:text="${mensajeExito}"></p>
-        </div>
         <form th:action="@{/flights/programar}" th:object="${flight}" method="post">
             <div class="form-group">
                 <label for="flightNumber">Número de Vuelo:</label>
@@ -40,18 +39,17 @@
                 <input type="datetime-local" class="form-control" id="departureDateTime" th:field="*{departureDateTime}"
                        required>
             </div>
+            
 
-
-            <!-- Seleccionar aeronave -->
             <div class="form-group">
                 <label for="aircraft">Aeronave:</label>
-                <select class="form-control" id="aircraft" name="aircraftId" required>
+                <select class="form-control" id="aircraft" th:field="*{aircraft}" required>
                     <option th:each="aircraft : ${listOfAircrafts}" th:value="${aircraft.idAircraft}"
                             th:text="${'ID: ' + aircraft.idAircraft + ', Capacidad: ' + aircraft.capacity + ', Filas: ' + aircraft.numberOfRows + ', Asientos por fila: ' + aircraft.seatsPerRow}"></option>
                 </select>
             </div>
 
-            <!-- Seleccionar ciudad de origen -->
+
             <div class="form-group">
                 <label for="originCity">Ciudad de Origen:</label>
                 <select class="form-control" id="originCity" th:field="*{originCity}" required>
@@ -59,7 +57,7 @@
                 </select>
             </div>
 
-            <!-- Seleccionar ciudad de destino -->
+
             <div class="form-group">
                 <label for="destCity">Ciudad de Destino:</label>
                 <select class="form-control" id="destCity" th:field="*{destCity}" required>
@@ -74,14 +72,14 @@
                     </ul>
                 </div>
             </div>
-            <!-- Mensaje de error para departureDateTime -->
+
             <div th:if="${#fields.hasErrors('departureDateTime')}" th:errors="*{departureDateTime}" class="alert alert-danger" role="alert"></div>
 
             <button type="submit" class="btn btn-primary">Programar Vuelo</button>
 
             <button type="reset" class="btn btn-warning">Borrar Campos</button>
 
-            <!-- Botón para volver al índice -->
+
             <a th:href="@{/}" class="btn btn-secondary">Volver al Índice</a>
         </form>
 

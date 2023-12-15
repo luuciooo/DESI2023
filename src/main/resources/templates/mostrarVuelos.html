@@ -31,14 +31,14 @@
 <div class="container mt-5">
     <h2 class="text-center">Lista de Vuelos</h2>
 
-    <!-- Formulario de filtro por fecha, ciudad de origen y ciudad de destino -->
+
     <form th:action="@{/flights/show}" method="get">
         <div class="form-group text-center">
             <label for="fecha">Filtrar por fecha:</label>
             <input type="date" id="fecha" name="fecha" class="form-control" th:value="${fecha}" />
         </div>
 
-        <!-- Lista desplegable para Ciudad de Origen -->
+
         <div class="form-group text-center">
             <label for="origen">Ciudad de Origen:</label>
             <select id="origen" name="origen" class="form-control">
@@ -48,7 +48,6 @@
             </select>
         </div>
 
-        <!-- Lista desplegable para Ciudad de Destino -->
         <div class="form-group text-center">
             <label for="destino">Ciudad de Destino:</label>
             <select id="destino" name="destino" class="form-control">
@@ -73,7 +72,6 @@
             <th class="text-center">Tipo de Vuelo</th>
             <th class="text-center">Estado</th>
             <th class="text-center">Cantidad de Asientos Libres</th>
-            <!-- Agrega más columnas según tus necesidades -->
         </tr>
         </thead>
         <tbody>
